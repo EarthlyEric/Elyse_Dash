@@ -1,7 +1,0 @@
-<?php
-
-<html
-<?php
-
-
-php>
