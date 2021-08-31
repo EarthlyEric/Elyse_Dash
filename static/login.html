@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Alice</title>
+    <title>Login - Alice</title>
     <meta property="og:image" content="assets/img/intro.png">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" sizes="400x400" href="assets/img/Alice-icon-round.png">
@@ -28,7 +28,7 @@
 
 <body style="background: #3cc3bb;">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="color: rgb(163,7,237);">
             <div class="col-md-9 col-lg-12 col-xl-10">
                 <div class="card shadow-lg o-hidden border-0 my-5">
                     <div class="card-body p-0">
@@ -36,24 +36,26 @@
                             <div class="col-lg-6 d-none d-lg-flex">
                                 <div class="flex-grow-1 bg-login-image" style="background: url(&quot;assets/img/login.png&quot;) bottom / cover;"></div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6"><a class="btn btn-primary" role="button" href="/index"><i class="fa fa-home"></i>回首頁</a>
                                 <div class="p-5">
+                                    <h1 style="text-align: center;border-color: rgb(24,23,24);color: rgb(0,0,0);"><i class="fa fa-dashboard" style="color: rgb(154,31,31);"></i>&nbsp;Alice 控制台</h1>
                                     <div class="text-center">
-                                        <h4 class="text-dark mb-4">歡迎回來</h4>
+                                        <h4 class="text-dark mb-4">歡迎回來 !</h4>
                                     </div>
                                     <form class="user">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                                        <div class="form-group"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
+                                        <hr><a class="btn btn-primary btn-block text-white btn-user" role="button" style="background: #5865f2;" href="/login/oauth2" target="_blank"><i class="fab fa-discord"></i>&nbsp; 使用Discord登入</a>
+                                        <hr>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <p></p>
+                                                <p>&nbsp;</p>
                                             </div>
-                                        </div><button class="btn btn-primary btn-block text-white btn-user" type="submit" style="background: #5865f2;">Login</button>
-                                        <hr><a class="btn btn-primary btn-block text-white btn-google btn-user" role="button"><i class="fab fa-google"></i>&nbsp; Login with Google</a><a class="btn btn-primary btn-block text-white btn-facebook btn-user" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
+                                        </div>
+                                        <p class="copyright" style="color: rgb(0,0,0);text-align: center;font-family: Cabin, sans-serif;line-height: 1;letter-spacing: 0px;"><strong>&nbsp;Alice © ReLoad Dev Inc. 2020~2021</strong><br><strong>All rights reserved</strong><br><br></p>
                                         <hr>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="register.html">Create an Account!</a></div>
+                                    <div class="text-center"></div>
+                                    <div class="text-center"></div>
                                 </div>
                             </div>
                         </div>
