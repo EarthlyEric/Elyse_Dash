@@ -70,11 +70,16 @@ def redirect_unauthorized(e):
 @requires_authorization
 def dashboard():
     user=discord.fetch_user()
-    print(user)
+    user_name=user.name
 
-    return render_template('dashboard.html')
+    return render_template('dashboard.html',user=user)
 
+@app.route('/logout')
+@requires_authorization
+def logout():
+    discord.revoke()
 
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     if deploy==False:
