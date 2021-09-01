@@ -1,7 +1,13 @@
+from gevent import monkey
+monkey.patch_all()
+
 import os
 from flask import Flask,render_template,redirect,url_for,send_from_directory
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from gevent.pywsgi import WSGIServer
 from configobj import ConfigObj
+from flask_compress import Compress
+
 
 config = ConfigObj('config.ini')
 
@@ -37,6 +43,9 @@ elif deploy==True:
 app.config["DISCORD_BOT_TOKEN"]="DISCORD_BOT_TOKEN_config"                    
 
 discord=DiscordOAuth2Session(app)
+
+compress = Compress()
+compress.init_app(app)
 
 @app.route('/')
 def index():
@@ -85,6 +94,7 @@ if __name__ == "__main__":
     if deploy==False:
         app.run(host='127.0.0.1',port=443,debug=True,ssl_context=('./server.crt', './server.key'))
     elif deploy==True:
-        app.run(host='0.0.0.0',port=443,debug=True)
+        http_server = WSGIServer(('0.0.0.0', 8080), app)
+        http_server.serve_forever()
 
     
