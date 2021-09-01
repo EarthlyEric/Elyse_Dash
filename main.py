@@ -1,22 +1,42 @@
 import os
 from flask import Flask,render_template,redirect,url_for,send_from_directory
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from configobj import ConfigObj
 
-deploy=False
+config = ConfigObj('config.ini')
+
+raw_deploy_config=config['deploy']
+if raw_deploy_config=='1':
+    deploy_config=True
+elif raw_deploy_config=='0':
+    deploy_config=False
+
+DISCORD_CLIENT_ID_config=int(config['DISCORD_CLIENT_ID'])
+DISCORD_CLIENT_SECRET_config=config['DISCORD_CLIENT_SECRET']
+DISCORD_BOT_TOKEN_config=config['DISCORD_BOT_TOKEN']
+
+
+
+deploy=deploy_config
 
 app = Flask(__name__,
             static_url_path='', 
-            static_folder='web/static',
-            template_folder='web/templates')
+            static_folder='web',
+            template_folder='web')
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"      
 
-app.config["DISCORD_CLIENT_ID"] = 870136029582098452    
-app.config["DISCORD_CLIENT_SECRET"] = "Yy5Cg9isk0xQsLej1fWAJ80v8wefXDeh"               
-app.config["DISCORD_REDIRECT_URI"] = "https://127.0.0.1/callback"                 
-app.config["DISCORD_BOT_TOKEN"] = "ODcwMTM2MDI5NTgyMDk4NDUy.YQIXUw.860tn47xIqW0SqgHRoxZW3H5BwE"                    
+app.secret_key=b"random bytes representing flask secret key"
+app.config["DISCORD_CLIENT_ID"]=DISCORD_CLIENT_ID_config   
+app.config["DISCORD_CLIENT_SECRET"]=DISCORD_CLIENT_SECRET_config
+if deploy==False:
+    app.config["DISCORD_REDIRECT_URI"]="https://127.0.0.1/callback"
+elif deploy==True:
+    app.config["DISCORD_REDIRECT_URI"]="https://alice.reload-dev.ml/callback"              
+                 
+app.config["DISCORD_BOT_TOKEN"]="DISCORD_BOT_TOKEN_config"                    
 
-discord = DiscordOAuth2Session(app)
+discord=DiscordOAuth2Session(app)
 
 @app.route('/')
 def index():
@@ -25,9 +45,10 @@ def index():
 
 @app.route('/login')
 def login():
+
     return render_template('login.html')
 
-@app.route('/login/oauth2')
+@app.route('/oauth2')
 def oauth2():
 
     return discord.create_session()
@@ -35,7 +56,8 @@ def oauth2():
 @app.route('/callback')
 def callback():
     discord.callback()
-    user = discord.fetch_user()
+    user=discord.fetch_user()
+    print(user)
 
     return redirect(url_for(".dashboard"))
 
@@ -47,7 +69,8 @@ def redirect_unauthorized(e):
 @app.route('/dashboard')
 @requires_authorization
 def dashboard():
-    user = discord.fetch_user()
+    user=discord.fetch_user()
+    print(user)
 
     return render_template('dashboard.html')
 
