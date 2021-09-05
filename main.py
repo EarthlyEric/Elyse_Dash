@@ -52,6 +52,16 @@ def index():
 
     return render_template('index.html')
 
+@app.route('/team')
+def team():
+
+    return render_template('team.html')
+
+@app.route('/thanks')
+def thanks():
+
+    return render_template('thanks.html')
+
 @app.route('/login')
 def login():
 
