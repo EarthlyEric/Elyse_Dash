@@ -38,7 +38,7 @@ app.config["DISCORD_CLIENT_SECRET"]=DISCORD_CLIENT_SECRET_config
 if deploy==False:
     app.config["DISCORD_REDIRECT_URI"]="https://127.0.0.1/callback"
 elif deploy==True:
-    app.config["DISCORD_REDIRECT_URI"]="https://alice.reload-dev.ml/callback"              
+    app.config["DISCORD_REDIRECT_URI"]="https://elyse.reload-dev.ml/callback"              
                  
 app.config["DISCORD_BOT_TOKEN"]="DISCORD_BOT_TOKEN_config"                    
 
