@@ -96,6 +96,7 @@ def dashboard():
 @app.route('/logout')
 @requires_authorization
 def logout():
+    
     discord.revoke()
 
     return redirect(url_for("index"))
